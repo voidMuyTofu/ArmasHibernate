@@ -42,6 +42,8 @@ public class JPanelPersonajes extends JPanel implements ActionListener, MouseLis
 	private boolean activo;
 	public JButton btRecuperar;
 	public JButton btEliminarTodo;
+	
+	Personaje pers;
 
 	/**
 	 * Create the panel.
@@ -153,16 +155,15 @@ public class JPanelPersonajes extends JPanel implements ActionListener, MouseLis
 				refrescarLista();
 			}
 			else {
-				Personaje personaje = (Personaje) listaPersonajes.getSelectedValue();
-				personaje.setNombre(nombre);
-				personaje.setDescripcion(descripcion);
-				personaje.setVida(vida);
-				personaje.setAtaque(ataque);
+						
+				pers.setNombre(nombre);
+				pers.setDescripcion(descripcion);
+				pers.setVida(vida);
+				pers.setAtaque(ataque);
 				List<Arma> listaArmas = listaBusqueda.getListadoArmas();
-				personaje.setArmas(listaArmas);
-				modificar(personaje, (ArrayList<Arma>) listaArmas);
+				pers.setArmas(listaArmas);
 				Modelo modelo = new Modelo();
-				modelo.guardarPersonaje(personaje);
+				modelo.guardarPersonaje(pers);
 				refrescarLista();
 			}
 			
@@ -271,7 +272,7 @@ public class JPanelPersonajes extends JPanel implements ActionListener, MouseLis
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(e.getSource() == listaPersonajes) {
-			Personaje pers = (Personaje) listaPersonajes.getSelectedValue();
+			pers = (Personaje) listaPersonajes.getSelectedValue();
 			cargar(pers);
 			modoEdicion(false);
 			listaBusqueda.refrescarLista(pers.getArmas());

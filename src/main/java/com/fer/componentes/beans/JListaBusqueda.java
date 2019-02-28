@@ -76,7 +76,8 @@ public class JListaBusqueda extends JPanel implements ActionListener{
 		btAnadirArma.setActionCommand("+");
 		btEliminar.addActionListener(this);
 		btEliminar.setActionCommand("-");
-		
+		btBuscar.addActionListener(this);
+		btBuscar.setActionCommand("buscar");
 		
 		
 	}
@@ -108,6 +109,13 @@ public class JListaBusqueda extends JPanel implements ActionListener{
 			if(armaSeleccionada == null)
 				return;
 			modeloLista.removeElement(armaSeleccionada);
+			armaSeleccionada.setPersonaje(null);
+			Modelo modelo = new Modelo();
+			modelo.guardarArma(armaSeleccionada);
+			jcArmas.addItem(armaSeleccionada);
+			
+			break;
+		case "buscar":
 			
 			break;
 		}

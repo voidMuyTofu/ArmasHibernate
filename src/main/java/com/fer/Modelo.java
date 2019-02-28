@@ -30,10 +30,11 @@ public class Modelo {
 	public void guardarPersonaje(Personaje personaje) {
 		Session sesion = HibernateUtil.getCurrentSession();
 		sesion.beginTransaction();
-		sesion.save(personaje);
+		sesion.saveOrUpdate(personaje);
 		for (Arma arma : personaje.getArmas()) {
 			arma.setPersonaje(personaje);
-			sesion.save(arma);
+			System.out.println(arma.getNombre());
+			sesion.saveOrUpdate(arma);
 		}
 		sesion.getTransaction().commit();
 		sesion.close();
@@ -42,7 +43,7 @@ public class Modelo {
 	public void guardarArma(Arma arma) {
 		Session sesion = HibernateUtil.getCurrentSession();
 		sesion.beginTransaction();
-		sesion.save(arma);
+		sesion.saveOrUpdate(arma);
 		sesion.getTransaction().commit();
 		sesion.close();
 	}
